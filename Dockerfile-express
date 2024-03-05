@@ -1,0 +1,14 @@
+FROM node:20
+
+WORKDIR /delon
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+# Commande pour démarrer le serveur
+CMD ["node", "server.js"]

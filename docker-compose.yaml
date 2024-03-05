@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  express:
+    build:
+      context: .
+      dockerfile: Dockerfile-express
+    environment:
+      PORT: ${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - ${LOCAL_DIR}/upload:${UPLOAD_DIR}
+      - ${LOCAL_DIR}/images:${PARENT_DIR}
+    networks:
+      - app-net
+
+  vue:
+    build:
+      context: .
+      dockerfile: Dockerfile-vue
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+
+    networks:
+      - app-net
+
+networks:
+  app-net:
